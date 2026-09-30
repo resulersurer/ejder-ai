@@ -42,6 +42,15 @@ test("PostgreSQL schema enforces identity, references and demo isolation", async
         "utf8",
       ),
     );
+    await db.exec(
+      await readFile(
+        new URL(
+          "../database/migrations/002_tour_ai_configurations.sql",
+          import.meta.url,
+        ),
+        "utf8",
+      ),
+    );
     const leadId = randomUUID();
     const callId = randomUUID();
     const demoLeadId = randomUUID();
@@ -157,6 +166,28 @@ test("PostgreSQL schema enforces identity, references and demo isolation", async
           ),
           sqlState("23514"),
         );
+      },
+    );
+    await t.test(
+      "tour AI configuration validates phone and upserts by tour",
+      async () => {
+        await assert.rejects(
+          db.query(
+            "INSERT INTO ejder_ai.tour_ai_configurations (turtakip_tour_id, tour_name, tour_slug, phone_number, ai_agent_key, ai_display_name) VALUES ('tour-bad', 'Test Tur', 'test-tur', '08501234567', 'SALES', 'Satış danışmanı')",
+          ),
+          sqlState("23514"),
+        );
+        await db.query(
+          "INSERT INTO ejder_ai.tour_ai_configurations (turtakip_tour_id, tour_name, tour_slug, phone_number, ai_agent_key, ai_display_name) VALUES ('tour-1', 'Test Tur', 'test-tur', '+908501234567', 'SALES', 'Satış danışmanı') ON CONFLICT (turtakip_tour_id) DO UPDATE SET phone_number = EXCLUDED.phone_number",
+        );
+        await db.query(
+          "INSERT INTO ejder_ai.tour_ai_configurations (turtakip_tour_id, tour_name, tour_slug, phone_number, ai_agent_key, ai_display_name) VALUES ('tour-1', 'Test Tur', 'test-tur', '+908509876543', 'SALES', 'Satış danışmanı') ON CONFLICT (turtakip_tour_id) DO UPDATE SET phone_number = EXCLUDED.phone_number",
+        );
+        const result = await db.query<{ phone_number: string }>(
+          "SELECT phone_number FROM ejder_ai.tour_ai_configurations WHERE turtakip_tour_id = 'tour-1'",
+        );
+        assert.equal(result.rows.length, 1);
+        assert.equal(result.rows[0].phone_number, "+908509876543");
       },
     );
   } finally {

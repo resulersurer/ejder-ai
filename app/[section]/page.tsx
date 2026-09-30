@@ -1,12 +1,9 @@
 import { notFound } from "next/navigation";
 import { Workspace } from "@/components/workspace";
+import { TourAiPage } from "@/components/tour-ai-page";
 import { sections, type Section } from "@/lib/navigation";
 
-export function generateStaticParams() {
-  return Object.keys(sections)
-    .filter((section) => section !== "overview")
-    .map((section) => ({ section }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -24,5 +21,6 @@ export default async function SectionPage({
 }) {
   const { section } = await params;
   if (!Object.hasOwn(sections, section) || section === "overview") notFound();
+  if (section === "tour-ai") return <TourAiPage />;
   return <Workspace section={section as Section} />;
 }

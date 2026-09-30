@@ -6,6 +6,7 @@ import { useState } from "react";
 import {
   ArrowUpRight,
   AudioLines,
+  Bot,
   ChevronRight,
   FlaskConical,
   LayoutDashboard,
@@ -23,6 +24,7 @@ const icons = {
   leads: UsersRound,
   calls: AudioLines,
   reservations: Ticket,
+  "tour-ai": Bot,
   integrations: Plug,
 };
 
@@ -146,14 +148,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main id="main-content" tabIndex={-1}>
-          <div className="demo-banner">
-            <FlaskConical size={15} />
-            <span>
-              <strong>Önizleme çalışma alanı.</strong> Örnek kayıtlarla deneyin;
-              gerçek müşteri bilgisi girmeyin. Değişiklikler yalnızca bu
-              tarayıcıya kaydedilir.
-            </span>
-          </div>
+          {pathname === "/tour-ai" ? (
+            <div className="demo-banner live-banner">
+              <Plug size={15} />
+              <span>
+                <strong>Canlı yapılandırma alanı.</strong> Tur bilgileri
+                TurTakip’ten okunur; kaydedilen eşleştirmeler Neon’da saklanır.
+              </span>
+            </div>
+          ) : (
+            <div className="demo-banner">
+              <FlaskConical size={15} />
+              <span>
+                <strong>Önizleme çalışma alanı.</strong> Örnek kayıtlarla
+                deneyin; gerçek müşteri bilgisi girmeyin. Değişiklikler yalnızca
+                bu tarayıcıya kaydedilir.
+              </span>
+            </div>
+          )}
           {storageError && (
             <div className="error-banner" role="alert">
               {storageError}{" "}

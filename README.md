@@ -12,6 +12,7 @@ TurTakip form taleplerini, yapay zekâ görüşmelerini ve rezervasyon aktarım�
 - Görüşmeler: manuel demo sonuçları ve görüşme geçmişi.
 - Rezervasyonlar: olumlu sonuca sahip lead için kalkış ve yolcu bilgilerini doğrulayarak yerel taslak oluşturma. Aynı lead için ikinci taslak engellenir.
 - Entegrasyonlar: gerçek bağlantı durumları, yol haritası ve onaylı demo sıfırlama.
+- Tur & AI: TurTakip’ten canlı tur listesini alma; turu telefon numarası, AI görevi ve konuşma talimatıyla Neon üzerinde eşleştirme.
 - Mobil uyumlu arayüz ve yerel olarak paketlenmiş Inter yazı tipi.
 
 Demo değişiklikleri `localStorage` içinde bu tarayıcıya kaydedilir. Yenileme ve sayfa geçişlerinde korunur; aynı tarayıcıdaki sekmeler güncellenir. Bu depolama merkezi veri tabanı değildir. Depolama kapalıysa veya kayıtlar bozulmuşsa uygulama bunu bildirir; başarısız kayıtları başarılı göstermez. Demo kayıtlarının tamamında `isDemo: true` bulunur ve hiçbir dış servise gönderilmezler.
@@ -62,3 +63,5 @@ Neon sunucu erişim katmanı, tablo migration'ı ve `db:check` / `db:migrate` ko
 4. Sesli yapay zekâ ve Verimor bağlantısı.
 
 Entegrasyon ayrıntıları ve TurTakip kaynak kodunda doğrulanan bağlantı noktaları [mimari notlarında](docs/architecture.md) yer alır. Henüz webhook veya canlı rezervasyon endpoint'i uygulanmamıştır.
+
+Tur & AI sayfasının ortam değişkenleri ve güvenlik sınırları [Tur & AI notlarında](docs/tour-ai.md) açıklanır. Bu sayfadaki `enabled` seçimi henüz gerçek telefon araması başlatmaz.

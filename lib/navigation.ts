@@ -26,6 +26,13 @@ export const sections = {
     title: "Rezervasyon taslakları",
     description: "Görüşmeden rezervasyona hazır talepleri inceleyin.",
   },
+  "tour-ai": {
+    label: "Tur & AI",
+    href: "/tour-ai",
+    title: "Tur & AI eşleştirme",
+    description:
+      "TurTakip turlarını telefon numarası ve AI danışmanıyla eşleştirin.",
+  },
   integrations: {
     label: "Entegrasyonlar",
     href: "/integrations",
