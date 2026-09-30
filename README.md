@@ -2,7 +2,7 @@
 
 TurTakip form taleplerini, yapay zekâ görüşmelerini ve rezervasyon aktarımını tek bir operasyon akışında birleştirecek Next.js uygulaması.
 
-**İlk sürüm demo çalışma alanıdır.** Gerçek müşteri bilgisi girmeyin. Telefon araması, TurTakip bağlantısı, sunucu veri tabanı ve kullanıcı girişi henüz yoktur. Verimor en son aşamada bağlanacaktır.
+**İlk sürüm demo çalışma alanıdır.** Gerçek müşteri bilgisi girmeyin. Telefon araması, TurTakip bağlantısı, sunucu veritabanına bağlı panel işlemleri ve kullanıcı girişi henüz yoktur. Verimor en son aşamada bağlanacaktır.
 
 ## Çalışan özellikler
 
@@ -53,6 +53,8 @@ docs/architecture.md     TurTakip incelemesi ve entegrasyon tasarımı
 ```
 
 ## Sonraki aşamalar
+
+Neon sunucu erişim katmanı, tablo migration'ı ve `db:check` / `db:migrate` komutları hazırdır. Ortam bağlantısı ve kurulum adımları [veritabanı notlarında](docs/database.md) yer alır. Panel henüz bu tabloları kullanmaz; demo kayıtları otomatik olarak veritabanına taşınmaz.
 
 1. Yönetici oturumu ve kalıcı veri tabanı.
 2. TurTakip form kayıtlarından güvenilir lead aktarımı.
